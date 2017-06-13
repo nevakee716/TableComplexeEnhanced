@@ -1,0 +1,21 @@
+{
+  "name": "TableComplexeEnhance",
+  "description": "Allow you switch order of column, number of object/pages, add a button unset all filters, add a title",
+  "version": "0.0.1",
+  "main": "TableComplexeEnhanced.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nevakee716/TableComplexeEnhanced"
+  },
+  "author": "Mathias PFAUWADEL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nevakee716/TableComplexeEnhanced/issues"
+  },
+  "homepage": "",
+  "wiki": "https://github.com/nevakee716/TableComplexeEnhanced/wiki",
+  "evolve-version": "4.0 - 4.1"
+}
