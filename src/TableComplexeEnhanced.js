@@ -12,8 +12,8 @@
     title : true,
     clearFilterAtStart : true,
     clearButtonName : 'Clear All Filters',
-    exigence_grid : {
-      heightPercent : 2,
+    exigence_grid : { // nodeID
+      heightPercent : 1, // TableSize = size of the window / heightPercent
       column : {
         1 : {order : 7,size : 200},
         2 : {order : 3,size : 200},
@@ -21,8 +21,8 @@
         7 : {order : 1,size : 400} 
       }
     },
-    organisation_1624544826 : {
-      heightPercent : 2,
+    organisation_1624544826 : { // nodeID
+      heightPercent : 1, // TableSize = size of the window / heightPercent
       column : {
         1 : {order : 4,size : 100},
         2 : {order : 1,size : 200},
@@ -255,7 +255,7 @@
 
     cwApi.CwPendingEventsManager.deleteEvent("GridSetup");
 
-    if(this.clearFilterAtStart) {this.ClearFilter();}
+    if(TableComplexeEnhancedConfig.clearFilterAtStart) {this.ClearFilter();}
 
   };
 
