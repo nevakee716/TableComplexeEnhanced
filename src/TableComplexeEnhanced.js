@@ -205,6 +205,18 @@
     cwApi.CwPendingEventsManager.setEvent("GridSetup");
     var dataSource, gridObject, nodeSchema, mainItems, isIntersection, propertyGroupString, $container;
 
+    function createandGetIntersectionGrid(mainItems, properties, allitems, nodeSchema) {
+        var mainItemsWithKey, gridObject, iObjectTypeScriptName;
+        mainItemsWithKey = {};
+        mainItemsWithKey[properties.NodeID] = mainItems;
+        iObjectTypeScriptName = nodeSchema.iObjectTypeScriptName;
+        if (iObjectTypeScriptName !== null) {
+            iObjectTypeScriptName = iObjectTypeScriptName.toLowerCase();
+        }
+        gridObject = new cwBehaviours.CwKendoGridIntersectionObject(properties, mainItemsWithKey, allitems, iObjectTypeScriptName, nodeSchema.ObjectTypeScriptName.toLowerCase(), nodeSchema, nodeSchema.AssociationTypeScriptName.toLowerCase());
+        return gridObject;
+    }
+    
 
     if (cwApi.isNull(allitems)) {
         $container = $('div.' + properties.NodeID);
