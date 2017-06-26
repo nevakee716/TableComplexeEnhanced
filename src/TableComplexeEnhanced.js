@@ -31,6 +31,9 @@
     }    
   };
 
+
+
+  // remove the special column of the table complexe and replace after the switch
   var clearColumn = function (columns) {
     var columnCleared = [];
 
@@ -56,6 +59,7 @@
     }
     return result;
   };
+
 
 
   var reOrderColumn = function (columns,config) {
@@ -89,6 +93,7 @@
     return result;   
   };
 
+  // swap the colum of the table
   var columnSwapper = function (columns,nodeID) {
     var columnsObj = {};
     var result = [];
@@ -111,6 +116,8 @@
     return columns;    
   };
 
+
+  // Apply ratio to the height
   var calcHeight = function (height,nodeID) {
     if(TableComplexeEnhancedConfig.hasOwnProperty(nodeID) && TableComplexeEnhancedConfig[nodeID].hasOwnProperty("heightPercent")) {
       return height/TableComplexeEnhancedConfig[nodeID].heightPercent;
