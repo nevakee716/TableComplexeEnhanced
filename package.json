@@ -1,7 +1,7 @@
 {
   "name": "TableComplexeEnhance",
   "description": "Allow you switch order of column, number of object/pages, add a button unset all filters, add a title",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "TableComplexeEnhanced.js",
   "scripts": {
     "test": ""
