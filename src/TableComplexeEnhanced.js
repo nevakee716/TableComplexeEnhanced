@@ -10,24 +10,14 @@
   var TableComplexeEnhancedConfig = {
     itemPerPages : [5, 12, 42,9999],
     title : true,
+    urlText : "Click Here",
     clearFilterAtStart : true,
     clearButtonName : 'Clear All Filters',
-    exigence_grid : { // nodeID
-      heightPercent : 1, // TableSize = size of the window / heightPercent
-      column : {
-        1 : {order : 7,size : 200},
-        2 : {order : 3,size : 200},
-        3 : {order : 2,size : 200},
-        7 : {order : 1,size : 400} 
-      }
+    organisation_1994355017 : { // nodeID
+      heightPercent : 2, // TableSize = size of the window / heightPercent
     },
-    organisation_1624544826 : { // nodeID
-      heightPercent : 1, // TableSize = size of the window / heightPercent
-      column : {
-        1 : {order : 4,size : 100},
-        2 : {order : 1,size : 200},
-        4 : {order : 2,size : 200} 
-      }
+    processus_1542613035 : { // nodeID
+      heightPercent : 2, // TableSize = size of the window / heightPercent
     }    
   };
 
@@ -288,7 +278,26 @@
     $(" form.k-filter-menu button[type='reset']").trigger("click");
   };
 
+  //Vrai Faux
+  cwBehaviours.CwKendoGridBooleanType.prototype.getColumnTemplate = function () {
+    return "#= data." + this.property.scriptName + " ? '" + '<i style="color:green" class="fa fa-check" aria-hidden="true"></i>' + "' : '" + '<i style="color:red" class="fa fa-times" aria-hidden="true"></i>' + "' #";
+  };
+  
+  cwAPI.cwPropertiesGroups.types.booleanValue = function(value) {
+    if (value !== false) {
+      value = '<i style="color:green" class="fa fa-check"><span class="hidden">' + jQuery.i18n.prop("global_true") + '</span></i>';
+    } else {
+      value = '<i style="color:red" class="fa fa-times"><span class="hidden">' + jQuery.i18n.prop("global_false") + '</span></i>';
+    }
+    return value;
+  };
 
+  //Url
+  cwApi.cwPropertiesGroups.types.URLValue = function (value) {
+      var link = value;
+      value = TableComplexeEnhancedConfig.urlText + ' <a href="' + link + '">' + '<div style="display:none">' + link + '</div>' + "<i class='fa fa-file-text' </i>" + '</a>';
+      return value;
+  };
 
   if(cwBehaviours && cwBehaviours.hasOwnProperty('CwKendoGrid') && cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData) {
     cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData = tableComplexeEnhanced.cwKendoGrid.setAnGetKendoGridData;
