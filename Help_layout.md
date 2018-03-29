@@ -1,9 +1,10 @@
 | **Name** | **TableComplexeEnhanced** | **Version** | 
 | --- | --- | --- |
-| **Updated by** | Mathias PFAUWADEL | 1.0 | 
+| **Updated by** | Mathias PFAUWADEL | 1.1 | 
 
 ## Patch Notes
 
+* 1.1 : Boolean property are now, display as check and cross in tableComplexe AND propertyGroup
 * 1.0 : 1st version working
 
 ## TBD

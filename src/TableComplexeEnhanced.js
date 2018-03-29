@@ -18,6 +18,12 @@
     },
     processus_1542613035 : { // nodeID
       heightPercent : 2, // TableSize = size of the window / heightPercent
+    },
+    application_grid : {
+   	  heightPercent : 1,
+      column : {
+        5 : {name : "toto"},
+      }
     }    
   };
 
@@ -57,8 +63,9 @@
     var i;
     for(i=0;i < columns.length;i++ ) {
         if(config.hasOwnProperty(i + 1)) {
-          columns[i].width = config[i+1].size; // gestion size
-          columnsObj[config[i+1].order - 1] = columns[i]; // custom order
+        	if(config[i+1].size) columns[i].width = config[i+1].size; // gestion size
+        	if(config[i+1].name) columns[i].title = config[i+1].name; // gestion rename  
+        	if(config[i+1].order) columnsObj[config[i+1].order - 1] = columns[i]; // custom order       	          
         } else {
           columnsObj[i] = columns[i];          
         }
