@@ -1,9 +1,10 @@
 | **Name** | **TableComplexeEnhanced** | **Version** | 
 | --- | --- | --- |
-| **Updated by** | Mathias PFAUWADEL | 1.2 | 
+| **Updated by** | Mathias PFAUWADEL | 1.3 | 
 
 ## Patch Notes
 
+* 1.3 : Adding popOut
 * 1.2 : Allow you to rename the label of a column
 * 1.1 : Boolean property are now, display as check and cross in tableComplexe AND propertyGroup
 * 1.0 : 1st version working
@@ -30,6 +31,7 @@ Allow you have option when displaying a tableComplexe(title, size of the table, 
     title : true,
     clearFilterAtStart : true,
     clearButtonName : 'Clear All Filters',
+    popOut: true,
     exigence_grid : {
       heightPercent : 2,
       column : {
@@ -46,6 +48,9 @@ Allow you have option when displaying a tableComplexe(title, size of the table, 
         2 : {order : 1,size : 200},
         4 : {order : 2,size : 200} 
       }
+    },
+    transformation_457481980j: {
+      popOutName: "transformation2_diagram_popout"
     }    
   };
 ```
@@ -70,6 +75,22 @@ Put true, if you want the column filter to be cleared at start
 
 `clearButtonName : 'Clear All Filters',`
 Choose the label of the Clear filter button
+
+### popOut button:
+
+`popOut: true`
+Put true if you want to activate popOut button
+
+### popOut Name:
+
+By default, the table will try to load the default popout, {objectype}_diagram_popout
+But you can specify a popOut by node
+
+    `transformation_457481980: {
+      popOutName: "transformation2_diagram_popout"
+    }`
+
+If your popOut doesn't exist, the button will not be display
 
 ### Column order, size and label:
 
