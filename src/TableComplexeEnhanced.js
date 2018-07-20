@@ -17,6 +17,7 @@
     popOut: true,
     organisation_1994355017: { // nodeID
       heightPercent: 2, // TableSize = size of the window / heightPercent
+      popOutName: ""
     },
     processus_1542613035: { // nodeID
       heightPercent: 2, // TableSize = size of the window / heightPercent
@@ -28,6 +29,9 @@
           name: "toto"
         },
       }
+    },
+    transformation_457481980j: {
+      popOutName: "transformation2_diagram_popout"
     }
   };
 
@@ -360,8 +364,12 @@
       if (addDelete) {
         output.push(cwApi.cwKendoGridButtons.getDeleteButton());
       }
-      if (TableComplexeEnhancedConfig.popOut) {
-        popOutName = cwApi.replaceSpecialCharacters(e.item.objectTypeScriptName) + "_diagram_popout";
+      if (TableComplexeEnhancedConfig.popOut && e.item && e.item.nodeID) {
+        if(TableComplexeEnhancedConfig.hasOwnProperty(e.item.nodeID))
+          popOutName = cwApi.replaceSpecialCharacters(TableComplexeEnhancedConfig[e.item.nodeID].popOutName );
+        else {
+          popOutName = cwApi.replaceSpecialCharacters(e.item.objectTypeScriptName) + "_diagram_popout";
+        }
         if(cwAPI.ViewSchemaManager.pageExists(popOutName) === true) {
           output.push(tableComplexeEnhanced.getPopOutButton(e,popOutName));
         }
