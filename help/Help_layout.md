@@ -1,9 +1,10 @@
 | **Name** | **TableComplexeEnhanced** | **Version** | 
 | --- | --- | --- |
-| **Updated by** | Mathias PFAUWADEL | 1.3 | 
+| **Updated by** | Mathias PFAUWADEL | 1.4 | 
 
 ## Patch Notes
 
+* 1.4 : Allow you to open URL in new Tab
 * 1.3 : Adding popOut
 * 1.2 : Allow you to rename the label of a column
 * 1.1 : Boolean property are now, display as check and cross in tableComplexe AND propertyGroup
@@ -29,6 +30,8 @@ Allow you have option when displaying a tableComplexe(title, size of the table, 
   var TableComplexeEnhancedConfig = {
     itemPerPages : [5, 12, 42,9999],
     title : true,
+    urlText: "Cliquez Ici",
+    openInNewTab: true,
     clearFilterAtStart : true,
     clearButtonName : 'Clear All Filters',
     popOut: true,
@@ -65,6 +68,14 @@ Use the line to configure the number of items per pages. When you ``arrive on th
 
 `    title : true,`
 Put true if you want the title to be display, the title will be the nodeName.
+
+### urlText : 
+
+Select the text to introduice the link, usually click here
+
+### openInNewTab :
+
+If you click on a link it will open it in a new tab
 
 ### clearFilterAtStart:
 
