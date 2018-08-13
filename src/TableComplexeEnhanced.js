@@ -11,7 +11,8 @@
   var TableComplexeEnhancedConfig = {
     itemPerPages: [5, 12, 42, 9999],
     title: true,
-    urlText: "Click Here",
+    urlText: "Cliquez Ici",
+    openInNewTab: true,
     clearFilterAtStart: true,
     clearButtonName: 'Clear All Filters',
     popOut: true,
@@ -339,8 +340,9 @@
 
   //Url
   cwApi.cwPropertiesGroups.types.URLValue = function(value) {
-    var link = value;
-    value = TableComplexeEnhancedConfig.urlText + ' <a href="' + link + '">' + '<div style="display:none">' + link + '</div>' + "<i class='fa fa-file-text' </i>" + '</a>';
+    var txt = "",link = value;
+    if(TableComplexeEnhancedConfig.openInNewTab) txt = 'target="_blank"';
+    value = TableComplexeEnhancedConfig.urlText + ' <a ' + txt + 'href="' + link + '">' + '<div style="display:none">' + link + '</div>' + "<i class='fa fa-file-text' </i>" + '</a>';
     return value;
   };
 
