@@ -23,6 +23,12 @@
     processus_1542613035: { // nodeID
       heightPercent: 2, // TableSize = size of the window / heightPercent
     },
+    flux_20005_667676674 : {
+      heightPercent: 2, // TableSize = size of the window / heightPercent
+    },
+    flux_20006_2055139330 : {
+      heightPercent: 2, // TableSize = size of the window / heightPercent
+    },
     application_grid: {
       heightPercent: 1,
       column: {
@@ -367,7 +373,7 @@
         output.push(cwApi.cwKendoGridButtons.getDeleteButton());
       }
       if (TableComplexeEnhancedConfig.popOut && e.item && e.item.nodeID) {
-        if(TableComplexeEnhancedConfig.hasOwnProperty(e.item.nodeID))
+        if(TableComplexeEnhancedConfig.hasOwnProperty(e.item.nodeID) && TableComplexeEnhancedConfig[e.item.nodeID].popOutName)
           popOutName = cwApi.replaceSpecialCharacters(TableComplexeEnhancedConfig[e.item.nodeID].popOutName );
         else {
           popOutName = cwApi.replaceSpecialCharacters(e.item.objectTypeScriptName) + "_diagram_popout";
