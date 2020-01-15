@@ -1,7 +1,7 @@
 /*jslint browser:true*/
 /*global cwAPI, jQuery, cwTabManager*/
 (function(cwApi, $) {
-  'use strict';
+  "use strict";
 
   var tableComplexeEnhanced = {};
   tableComplexeEnhanced.cwKendoGrid = {};
@@ -14,32 +14,34 @@
     urlText: "Cliquez Ici",
     openInNewTab: true,
     clearFilterAtStart: true,
-    clearButtonName: 'Clear All Filters',
+    clearButtonName: "Clear All Filters",
     popOut: true,
-    organisation_1994355017: { // nodeID
+    organisation_1994355017: {
+      // nodeID
       heightPercent: 2, // TableSize = size of the window / heightPercent
-      popOutName: ""
+      popOutName: "",
     },
-    processus_1542613035: { // nodeID
+    processus_1542613035: {
+      // nodeID
       heightPercent: 2, // TableSize = size of the window / heightPercent
     },
-    flux_20005_667676674 : {
+    flux_20005_667676674: {
       heightPercent: 2, // TableSize = size of the window / heightPercent
     },
-    flux_20006_2055139330 : {
+    flux_20006_2055139330: {
       heightPercent: 2, // TableSize = size of the window / heightPercent
     },
     application_grid: {
       heightPercent: 1,
       column: {
         5: {
-          name: "toto"
+          name: "toto",
         },
-      }
+      },
     },
     transformation_457481980j: {
-      popOutName: "transformation2_diagram_popout"
-    }
+      popOutName: "transformation2_diagram_popout",
+    },
   };
 
   var kendoGridDataSaved = {};
@@ -51,7 +53,7 @@
     var result = {
       iUpdate: undefined,
       iCreate: undefined,
-      columnCleared: columnCleared
+      columnCleared: columnCleared,
     };
 
     for (i = 0; i < columns.length; i++) {
@@ -70,16 +72,14 @@
     return result;
   };
 
-
-
   var reOrderColumn = function(columns, config) {
     var columnsObj = {};
     var i;
     for (i = 0; i < columns.length; i++) {
       if (config.hasOwnProperty(i + 1)) {
         if (config[i + 1].size) columns[i].width = config[i + 1].size; // gestion size
-        if (config[i + 1].name) columns[i].title = config[i + 1].name; // gestion rename  
-        if (config[i + 1].order) columnsObj[config[i + 1].order - 1] = columns[i]; // custom order       	          
+        if (config[i + 1].name) columns[i].title = config[i + 1].name; // gestion rename
+        if (config[i + 1].order) columnsObj[config[i + 1].order - 1] = columns[i]; // custom order
       } else {
         columnsObj[i] = columns[i];
       }
@@ -113,10 +113,10 @@
     var columnCleared = [];
     var config;
 
-    if(TableComplexeEnhancedConfig.popOut) {
-      if(columns[0].title == "Options") columns[0].width += 35;
-      if(columns[columns.length-1].title == "Options") columns[columns.length-1].width += 35;
-    } 
+    if (TableComplexeEnhancedConfig.popOut) {
+      if (columns[0].title == "Options") columns[0].width += 35;
+      if (columns[columns.length - 1].title == "Options") columns[columns.length - 1].width += 35;
+    }
     if (TableComplexeEnhancedConfig.hasOwnProperty(nodeID) && TableComplexeEnhancedConfig[nodeID].hasOwnProperty("column")) {
       config = TableComplexeEnhancedConfig[nodeID].column;
       clearColumnResult = clearColumn(columns);
@@ -131,7 +131,6 @@
     return columns;
   };
 
-
   // Apply ratio to the height
   var calcHeight = function(height, nodeID) {
     if (TableComplexeEnhancedConfig.hasOwnProperty(nodeID) && TableComplexeEnhancedConfig[nodeID].hasOwnProperty("heightPercent")) {
@@ -139,9 +138,7 @@
     } else {
       return height;
     }
-
   };
-
 
   tableComplexeEnhanced.cwKendoGrid.setAnGetKendoGridData = function(dataSource) {
     this.columns = columnSwapper(this.columns, this.nodeSchema.NodeID);
@@ -155,16 +152,16 @@
         mode: this.getEditableString(),
         confirmation: false,
         window: {
-          title: $.i18n.prop('grid_popup_edit'),
-        }
+          title: $.i18n.prop("grid_popup_edit"),
+        },
       },
       pageable: {
         refresh: false,
         pageSizes: TableComplexeEnhancedConfig.itemPerPages,
-        buttonCount: 5
+        buttonCount: 5,
       },
       page: tableComplexeEnhanced.cwKendoGrid.enablePopoutButton,
-      filter : tableComplexeEnhanced.cwKendoGrid.enablePopoutButton,
+      filter: tableComplexeEnhanced.cwKendoGrid.enablePopoutButton,
       edit: this.editEvent.bind(this),
       scrollable: true,
       sortable: true,
@@ -172,21 +169,19 @@
       remove: this.remove.bind(this),
       filterable: cwApi.cwKendoGridFilter.getFilterValues(),
       toolbar: cwApi.CwKendoGridToolBar.getToolBarItems(this.isAssociationgrid, this.enableAdd, this.canCreate, this.canCreateIntersection, this.properties.ObjectTypeScriptName, this.hasMandatoryAssociation, this.properties.Behaviour.Options, this.nodeSchema),
-      columns: this.columns
+      columns: this.columns,
     };
 
     if (TableComplexeEnhancedConfig.title) {
       var obj = {
-        name: 'Title',
-        template: '<h3 style="right:50%; position:absolute">' + this.nodeSchema.NodeName + '</h3>'
+        name: "Title",
+        template: '<h3 style="right:50%; position:absolute">' + this.nodeSchema.NodeName + "</h3>",
       };
       kendoGridData.toolbar.unshift(obj);
     }
     kendoGridDataSaved = kendoGridData;
     return kendoGridData;
   };
-
-
 
   tableComplexeEnhanced.cwKendoGridToolBar.getToolBarItems = function(isAssociation, isAddEnabled, canCreate, canCreateIntersection, objectTypeScriptName, hasMandatoryAssociation, gridOptions, nodeShema) {
     var toolBarObject, itemList;
@@ -203,7 +198,6 @@
     return itemList;
   };
 
-
   tableComplexeEnhanced.cwKendoGridToolBar.varifyAndAppendClearFilterButton = function(itemList) {
     //no export button on pop up inex page grid
     if (((this.pageViewType === "index" && !this.isAssociation) || this.pageViewType === cwApi.CwPageType.Single) && !cwApi.isIE9()) {
@@ -214,7 +208,7 @@
   tableComplexeEnhanced.cwKendoGridToolBar.getClearFilterButton = function() {
     var clearFilterButton = {
       name: "clearFilter",
-      template: '<a class="k-button k-button-icontext k-grid-clearFilter"><i class="fa fa-filter"></i>' + TableComplexeEnhancedConfig.clearButtonName + '</a>'
+      template: '<a class="k-button k-button-icontext k-grid-clearFilter"><i class="fa fa-filter"></i>' + TableComplexeEnhancedConfig.clearButtonName + "</a>",
     };
     return clearFilterButton;
   };
@@ -235,9 +229,8 @@
       return gridObject;
     }
 
-
     if (cwApi.isNull(allitems)) {
-      $container = $('div.' + properties.NodeID);
+      $container = $("div." + properties.NodeID);
       cwApi.cwDisplayManager.setNoDataAvailableHtml($container);
       cwApi.CwPendingEventsManager.deleteEvent("GridSetup");
       return;
@@ -284,13 +277,10 @@
 
     this.enableClearFilter($container);
 
-
-
     dataSource._filter = cwApi.upgradedParseJSON(cwApi.CwLocalStorage.getGridFilterValues(properties.NodeID));
     dataSource.filter(dataSource._filter);
 
     cwApi.cwKendoGridFilter.addFilterTitle(gridObject.mainContainer);
-
 
     cwApi.CwPendingEventsManager.deleteEvent("GridSetup");
 
@@ -299,12 +289,10 @@
     if (TableComplexeEnhancedConfig.clearFilterAtStart) {
       this.ClearFilter();
     }
-
   };
 
-
   tableComplexeEnhanced.cwKendoGrid.enableClearFilter = function(container) {
-    $('.k-grid-clearFilter').click(this.ClearFilter);
+    $(".k-grid-clearFilter").click(this.ClearFilter);
   };
 
   tableComplexeEnhanced.cwKendoGrid.ClearFilter = function() {
@@ -313,27 +301,26 @@
   };
 
   tableComplexeEnhanced.cwKendoGrid.enablePopoutButton = function(container) {
-    $('.k-grid-popoutitem').off('click');
-    setTimeout(function () {
-      $('.k-grid-popoutitem').on('click',tableComplexeEnhanced.cwKendoGrid.openPopOut);
-    },500);
+    $(".k-grid-popoutitem").off("click");
+    setTimeout(function() {
+      $(".k-grid-popoutitem").on("click", tableComplexeEnhanced.cwKendoGrid.openPopOut);
+    }, 500);
   };
 
   tableComplexeEnhanced.cwKendoGrid.openPopOut = function(e) {
-    var data_popout,obj = {};
-    if(e.target.hasAttribute("data_id")) {
+    var data_popout,
+      obj = {};
+    if (e.target.hasAttribute("data_id")) {
       obj.object_id = e.target.getAttribute("data_id");
       data_popout = e.target.getAttribute("data_popout");
     }
-    if(e.target.parentElement.hasAttribute("data_id")) {
+    if (e.target.parentElement.hasAttribute("data_id")) {
       obj.object_id = e.target.parentElement.getAttribute("data_id");
       data_popout = e.target.parentElement.getAttribute("data_popout");
     }
 
-
-    cwAPI.cwDiagramPopoutHelper.openDiagramPopout(obj,data_popout);
+    cwAPI.cwDiagramPopoutHelper.openDiagramPopout(obj, data_popout);
   };
-
 
   //Vrai Faux
   cwBehaviours.CwKendoGridBooleanType.prototype.getColumnTemplate = function() {
@@ -342,26 +329,27 @@
 
   cwAPI.cwPropertiesGroups.types.booleanValue = function(value) {
     if (value !== false) {
-      value = '<i style="color:green" class="fa fa-check"><span class="hidden">' + jQuery.i18n.prop("global_true") + '</span></i>';
+      value = '<i style="color:green" class="fa fa-check"><span class="hidden">' + jQuery.i18n.prop("global_true") + "</span></i>";
     } else {
-      value = '<i style="color:red" class="fa fa-times"><span class="hidden">' + jQuery.i18n.prop("global_false") + '</span></i>';
+      value = '<i style="color:red" class="fa fa-times"><span class="hidden">' + jQuery.i18n.prop("global_false") + "</span></i>";
     }
     return value;
   };
 
   //Url
   cwApi.cwPropertiesGroups.types.URLValue = function(value) {
-    var txt = "",link = value;
-    if(TableComplexeEnhancedConfig.openInNewTab) txt = 'target="_blank"';
-    value = TableComplexeEnhancedConfig.urlText + ' <a ' + txt + 'href="' + link + '">' + '<div style="display:none">' + link + '</div>' + "<i class='fa fa-file-text' </i>" + '</a>';
+    var txt = "",
+      link = value;
+    if (TableComplexeEnhancedConfig.openInNewTab) txt = 'target="_blank"';
+    value = TableComplexeEnhancedConfig.urlText + " <a " + txt + 'href="' + link + '">' + '<div style="display:none">' + link + "</div>" + "<i class='fa fa-file-text' </i>" + "</a>";
     return value;
   };
-
 
   // popout button
   tableComplexeEnhanced.cwKendoGridData.editTemplate = function(e) {
     var output = [];
-    var popOutName,self = this;
+    var popOutName,
+      self = this;
 
     function getEditColumnTemplate(isHidden, addEdit, addDelete, addRemove, isAssociation) {
       output.push(cwApi.cwKendoGridButtons.getActionZoneDiv(isHidden));
@@ -378,18 +366,17 @@
         output.push(cwApi.cwKendoGridButtons.getDeleteButton());
       }
       if (TableComplexeEnhancedConfig.popOut && e.item && e.item.nodeID) {
-        if(TableComplexeEnhancedConfig.hasOwnProperty(e.item.nodeID) && TableComplexeEnhancedConfig[e.item.nodeID].popOutName)
-          popOutName = cwApi.replaceSpecialCharacters(TableComplexeEnhancedConfig[e.item.nodeID].popOutName );
+        if (TableComplexeEnhancedConfig.hasOwnProperty(e.item.nodeID) && TableComplexeEnhancedConfig[e.item.nodeID].popOutName) popOutName = cwApi.replaceSpecialCharacters(TableComplexeEnhancedConfig[e.item.nodeID].popOutName);
         else {
           popOutName = cwApi.replaceSpecialCharacters(e.item.objectTypeScriptName) + "_diagram_popout";
         }
-        if(cwAPI.ViewSchemaManager.pageExists(popOutName) === true) {
-          output.push(tableComplexeEnhanced.getPopOutButton(e,popOutName));
+        if (cwAPI.ViewSchemaManager.pageExists(popOutName) === true) {
+          output.push(tableComplexeEnhanced.getPopOutButton(e, popOutName));
         }
       }
 
       output.push(cwApi.cwKendoGridButtons.getCloseDiv());
-      return output.join('');
+      return output.join("");
     }
 
     function isOpenButtonAvailable(isAssociation) {
@@ -414,7 +401,7 @@
       return false;
     }
 
-    if ($('.form-edit').length > 0) {
+    if ($(".form-edit").length > 0) {
       return getEditColumnTemplate(true, isUserCanUpdate(e), isUserCanDelete(e), isUserCanRemoveAssociation(e, this.isAssociationgrid), this.isAssociationgrid);
     }
 
@@ -424,17 +411,13 @@
     return getEditColumnTemplate(false, false, false, false, this.isAssociationgrid);
   };
 
-
-  tableComplexeEnhanced.getPopOutButton = function(e,popOutName) {
-    var output = ""; 
-    output = '<a class="k-button k-button-icontext k-grid-popoutitem" data_id=' + e.item.object_id + ' data_popout="' + popOutName + '"><i class="fa fa-external-link"></i>' + '</a>';
+  tableComplexeEnhanced.getPopOutButton = function(e, popOutName) {
+    var output = "";
+    output = '<a class="k-button k-button-icontext k-grid-popoutitem" data_id=' + e.item.object_id + ' data_popout="' + popOutName + '"><i class="fa fa-external-link"></i>' + "</a>";
     return output;
   };
 
-
-
-
-  if (cwBehaviours.hasOwnProperty('CwKendoGrid') && cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData) {
+  if (cwBehaviours.hasOwnProperty("CwKendoGrid") && cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData) {
     cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData = tableComplexeEnhanced.cwKendoGrid.setAnGetKendoGridData;
     cwBehaviours.CwKendoGrid.enableClearFilter = tableComplexeEnhanced.cwKendoGrid.enableClearFilter;
     cwBehaviours.CwKendoGrid.ClearFilter = tableComplexeEnhanced.cwKendoGrid.ClearFilter;
@@ -449,11 +432,7 @@
     cwAPI.CwKendoGridToolBar.prototype.getClearFilterButton = tableComplexeEnhanced.cwKendoGridToolBar.getClearFilterButton;
   }
 
-
   if (cwBehaviours.CwKendoGridData) {
     cwBehaviours.CwKendoGridData.prototype.editTemplate = tableComplexeEnhanced.cwKendoGridData.editTemplate;
-  };
-
-
-
-}(cwAPI, jQuery));
+  }
+})(cwAPI, jQuery);
