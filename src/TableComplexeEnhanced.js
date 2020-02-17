@@ -12,6 +12,7 @@
     itemPerPages: [5, 12, 42, 9999],
     title: true,
     urlText: "Cliquez Ici",
+    objectPageNameHeaderToProperty: false,
     openInNewTab: true,
     clearFilterAtStart: true,
     clearButtonName: "Clear All Filters",
@@ -417,8 +418,28 @@
     return output;
   };
 
+  tableComplexeEnhanced.createHeader = function(property, objectTypeScriptName, isIProperty) {
+    var propertyObject, idPropertyObject;
+    if (property.scriptName === "id") {
+      idPropertyObject = {
+        field: "Object_ID",
+        title: "Id",
+      };
+      this.createHeaderCommon(objectTypeScriptName, property, isIProperty, idPropertyObject, true, false, false, "Object_ID");
+    } else if (property.type === "Lookup") {
+      this.createHeaderLookup(property, objectTypeScriptName, isIProperty);
+    } else {
+      propertyObject = this.loadPropertyTypeObject(property);
+      if (cwApi.getQueryStringObject().cwtype === "single" && property.scriptName === "name" && TableComplexeEnhancedConfig.objectPageNameHeaderToProperty === false) {
+        propertyObject.title = cwApi.mm.getObjectType(objectTypeScriptName.toLowerCase()).name;
+      }
+      this.createHeaderCommon(objectTypeScriptName, property, isIProperty, propertyObject, false, false, false, property.scriptName);
+    }
+  };
+
   if (cwBehaviours.hasOwnProperty("CwKendoGrid") && cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData) {
     cwBehaviours.CwKendoGrid.prototype.setAnGetKendoGridData = tableComplexeEnhanced.cwKendoGrid.setAnGetKendoGridData;
+    cwBehaviours.cwKendoGridHeader.prototype.createHeader = tableComplexeEnhanced.createHeader;
     cwBehaviours.CwKendoGrid.enableClearFilter = tableComplexeEnhanced.cwKendoGrid.enableClearFilter;
     cwBehaviours.CwKendoGrid.ClearFilter = tableComplexeEnhanced.cwKendoGrid.ClearFilter;
     cwBehaviours.CwKendoGrid.enablePopoutButton = tableComplexeEnhanced.cwKendoGrid.enablePopoutButton;
