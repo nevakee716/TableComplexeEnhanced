@@ -1,9 +1,10 @@
 | **Name** | **TableComplexeEnhanced** | **Version** | 
 | --- | --- | --- |
-| **Updated by** | Mathias PFAUWADEL | 1.4 | 
+| **Updated by** | Mathias PFAUWADEL | 1.5 | 
 
 ## Patch Notes
 
+* 1.5 : On ObjectPage, by default name property is replace by name of the objectType this can be disable now
 * 1.4 : Allow you to open URL in new Tab
 * 1.3 : Adding popOut
 * 1.2 : Allow you to rename the label of a column
@@ -31,6 +32,7 @@ Allow you have option when displaying a tableComplexe(title, size of the table, 
     itemPerPages : [5, 12, 42,9999],
     title : true,
     urlText: "Cliquez Ici",
+    objectPageNameHeaderToProperty : false
     openInNewTab: true,
     clearFilterAtStart : true,
     clearButtonName : 'Clear All Filters',
@@ -72,6 +74,10 @@ Put true if you want the title to be display, the title will be the nodeName.
 ### urlText : 
 
 Select the text to introduice the link, usually click here
+
+### objectPageNameHeaderToProperty : 
+
+if true, on objectPage the name property will display correctly instead of displaying the name of the objectType
 
 ### openInNewTab :
 
